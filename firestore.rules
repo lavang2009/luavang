@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function isAdmin() { return signedIn() && request.auth.token.admin == true; }
+
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create, update, delete: if false;
+      match /checkoutIdempotency/{id} { allow read, write: if false; }
+      match /favorites/{productId} {
+        allow read, write: if isOwner(uid);
+      }
+      match /notifications/{id} {
+        allow read: if isOwner(uid) || isAdmin();
+        allow update: if isOwner(uid) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']);
+        allow create, delete: if false;
+      }
+      match /notificationReads/{id} { allow read, write: if false; }
+      match /transactions/{id} {
+        allow read: if isOwner(uid) || isAdmin();
+        allow write: if false;
+      }
+      match /orders/{id} { allow read: if isOwner(uid) || isAdmin(); allow write: if false; }
+    }
+
+    match /products/{productId} {
+      allow read: if resource.data.status == 'active' || isAdmin();
+      allow write: if isAdmin();
+      match /inventory/{itemId} {
+        allow read, write: if isAdmin();
+      }
+    }
+
+    match /orders/{orderId} {
+      allow read: if signedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if false;
+    }
+
+    match /orderDeliveries/{id} { allow read: if signedIn() && (resource.data.userId == request.auth.uid || isAdmin()); allow write: if false; }
+    match /deposits/{id} { allow read: if signedIn() && (resource.data.userId == request.auth.uid || isAdmin()); allow write: if false; }
+    match /vouchers/{id} { allow read: if isAdmin(); allow write: if false; }
+    match /voucherRedemptions/{id} { allow read: if isAdmin(); allow write: if false; }
+    match /providerTransactions/{id} { allow read: if isAdmin(); allow write: if false; }
+    match /cardDeposits/{id} { allow read: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid); allow write: if false; }
+    match /publicActivity/{id} { allow read: if true; allow write: if false; }
+
+    match /systemAnnouncements/{id} { allow read, write: if false; }
+    match /fileUploads/{id} { allow read, write: if false; }
+  }
+}

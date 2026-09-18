@@ -1,0 +1,2 @@
+import {NextRequest} from 'next/server';import {requireAdmin} from '@/lib/server/auth';import {adminDb} from '@/lib/firebase-admin';import {ok,handleApiError} from '@/lib/server/http';
+export async function GET(req:NextRequest){try{await requireAdmin(req);const s=await adminDb().collection('orders').orderBy('createdAt','desc').limit(200).get();return ok(s.docs.map(d=>({id:d.id,...d.data()})))}catch(e){return handleApiError(e)}}

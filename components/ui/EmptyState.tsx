@@ -1,0 +1,2 @@
+import { PackageOpen } from 'lucide-react';
+export function EmptyState({title='Chưa có dữ liệu',description='Khu vực này sẽ hiển thị dữ liệu khi có phát sinh.'}:{title?:string;description?:string}){return <div className="flex min-h-40 flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.025] p-8 text-center"><PackageOpen className="mb-3 h-8 w-8 text-white/35"/><div className="font-semibold text-white">{title}</div><div className="mt-1 max-w-md text-sm text-white/45">{description}</div></div>}

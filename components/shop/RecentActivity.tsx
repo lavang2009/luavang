@@ -1,0 +1,5 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {Zap} from 'lucide-react';
+import {api} from '@/lib/client/api';
+export function RecentActivity(){const [rows,setRows]=useState<any[]>([]);useEffect(()=>{api<any[]>('/api/public/activity').then(setRows).catch(()=>{})},[]);if(!rows.length)return null;return <section className="mx-auto max-w-7xl px-4 py-10 md:px-6"><div className="mb-3 text-xs uppercase tracking-[.24em] text-emerald-300/70">REAL ACTIVITY</div><div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[.035]"><div className="flex gap-6 overflow-x-auto p-4">{rows.map(r=><div key={r.id} className="flex min-w-[240px] items-center gap-3 rounded-xl border border-white/8 bg-black/10 px-4 py-3"><div className="grid h-9 w-9 place-items-center rounded-lg bg-emerald-400/10 text-emerald-300"><Zap className="h-4 w-4"/></div><div className="min-w-0"><div className="truncate text-sm text-white/75">Đơn hàng mới</div><div className="truncate text-xs text-white/35">{(r.productNames||[]).join(', ')}</div></div></div>)}</div></div></section>}

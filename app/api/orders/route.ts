@@ -1,0 +1,2 @@
+import { NextRequest } from 'next/server'; import { requireUser } from '@/lib/server/auth'; import { adminDb } from '@/lib/firebase-admin'; import { ok,handleApiError } from '@/lib/server/http';
+export async function GET(request:NextRequest){try{const user=await requireUser(request);const snap=await adminDb().collection('orders').where('userId','==',user.uid).orderBy('createdAt','desc').limit(50).get();return ok(snap.docs.map(d=>({id:d.id,...d.data()})))}catch(e){return handleApiError(e)}}

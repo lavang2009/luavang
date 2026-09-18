@@ -1,0 +1,1 @@
+export default function NotFound(){return <div className="mx-auto max-w-xl px-4 py-24 text-center"><div className="text-7xl font-black bg-linear-to-r from-fuchsia-400 to-cyan-300 bg-clip-text text-transparent">404</div><h1 className="mt-3 text-2xl font-black">Không tìm thấy</h1><p className="mt-2 text-white/45">Trang hoặc sản phẩm không tồn tại.</p></div>}

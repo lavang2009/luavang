@@ -1,0 +1,19 @@
+"use client";
+import { useEffect, useState } from 'react';
+import { Card } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { api } from '@/lib/client/api';
+import { toast } from 'sonner';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/Badge';
+
+type CardResult = { requestId: string; status: number|string; message?: string; declaredAmount:number; verifiedValue:number; creditedAmount:number };
+type StatusResult = { id:string; status:string; creditedAmount?:number; verifiedValue?:number; providerStatus?:number };
+
+export default function CardDeposit(){
+ const [form,setForm]=useState({telco:'VIETTEL',amount:100000,serial:'',code:''}); const [busy,setBusy]=useState(false); const [result,setResult]=useState<CardResult|null>(null); const [current,setCurrent]=useState<StatusResult|null>(null);
+ async function submit(){setBusy(true);try{const r=await api<CardResult>('/api/deposits/card',{method:'POST',body:JSON.stringify(form)});setResult(r);setCurrent({id:r.requestId,status:String(Number(r.status)===1?'success':Number(r.status)===99?'pending':'failed'),creditedAmount:r.creditedAmount,verifiedValue:r.verifiedValue});toast.success(Number(r.status)===1?'Nạp thẻ thành công.':'Thẻ đã được gửi tới NAPPay để xử lý.')}catch(e){toast.error(e instanceof Error?e.message:'Không gửi được thẻ.')}finally{setBusy(false)}}
+ useEffect(()=>{if(!result?.requestId||current?.status!=='pending')return;let active=true;let tries=0;const timer=window.setInterval(async()=>{if(!active||tries++>=30){window.clearInterval(timer);return}try{const r=await api<StatusResult>(`/api/deposits/card/${result.requestId}`);if(!active)return;setCurrent(r);if(r.status==='success'){toast.success(`Ví đã được cộng ${Number(r.creditedAmount||0).toLocaleString('vi-VN')} VNĐ.`);window.clearInterval(timer)}if(['failed','rejected'].includes(r.status))window.clearInterval(timer)}catch{/* polling best-effort */}},5000);return()=>{active=false;window.clearInterval(timer)}},[result?.requestId,current?.status]);
+ return <div className="mx-auto max-w-3xl px-4 py-12 md:px-6"><div className="flex items-end justify-between"><div><div className="text-xs uppercase tracking-[.2em] text-fuchsia-300/70">CARD TOPUP</div><h1 className="mt-2 text-4xl font-black">Nạp thẻ cào</h1></div><Link href="/deposit/history" className="text-sm text-white/45">Lịch sử →</Link></div><Card className="mt-8 p-6"><div className="grid gap-4 sm:grid-cols-2"><label className="space-y-2"><span className="text-sm text-white/70">Nhà mạng</span><select value={form.telco} onChange={e=>setForm({...form,telco:e.target.value})} className="w-full rounded-xl border border-white/10 bg-black/20 px-3 py-3 text-sm"><option value="VIETTEL">Viettel</option><option value="VINAPHONE">Vinaphone</option><option value="MOBIFONE">Mobifone</option></select></label><Input label="Mệnh giá khai báo" type="number" value={form.amount} onChange={e=>setForm({...form,amount:Number(e.target.value)})}/><Input label="Serial" value={form.serial} onChange={e=>setForm({...form,serial:e.target.value})}/><Input label="PIN / Code" value={form.code} onChange={e=>setForm({...form,code:e.target.value})}/></div><div className="mt-4 rounded-xl border border-orange-300/10 bg-orange-300/5 p-3 text-xs leading-5 text-white/45">Hệ thống chỉ cộng số tiền được NAPPay xác nhận. Mệnh giá khai báo không quyết định số tiền cộng ví.</div><Button className="mt-5 w-full" onClick={submit} loading={busy}>Gửi thẻ</Button>{current&&<div className="mt-5 flex items-center justify-between rounded-xl border border-white/10 bg-black/20 p-4"><div><div className="text-xs text-white/35">Trạng thái</div><div className="mt-1 font-semibold">{current.status}</div></div><Badge tone={current.status==='success'?'green':current.status==='pending'?'gray':'orange'}>{current.status}</Badge></div>}</Card></div>
+}
