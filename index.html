@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7fb">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="LUAVANG — khám phá web app, website, công cụ và trò chơi số trong một không gian gọn gàng, dễ sử dụng.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LUAVANG — Khám phá không gian số">
+  <meta property="og:description" content="Web app, website, công cụ và những trải nghiệm số thú vị.">
+  <meta property="og:site_name" content="LUAVANG">
+  <title>LUAVANG — Khám phá không gian số</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+  <header class="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="/" aria-label="LUAVANG — Trang chủ">
+        <span class="brand-mark" aria-hidden="true"><span>L</span><span>V</span></span>
+        <span class="brand-word">LUAVANG<span class="brand-dot">.</span><small>KHÔNG GIAN SỐ</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Điều hướng chính">
+        <a class="nav-link active" href="#discover">Khám phá</a>
+        <a class="nav-link" href="#categories">Danh mục</a>
+        <button class="nav-link nav-button" type="button" data-show-favorites>Đã lưu <span class="saved-count" data-saved-count>0</span></button>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button theme-toggle" type="button" aria-label="Chuyển giao diện sáng tối" title="Chuyển giao diện">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+        <button class="button button-dark support-trigger" type="button" data-open-support><span aria-hidden="true">♡</span> Đồng hành</button>
+        <button class="icon-button mobile-menu-toggle" type="button" aria-label="Mở danh mục" aria-expanded="false" aria-controls="mobile-nav">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobile-nav" hidden>
+      <a href="#discover">Khám phá</a><a href="#categories">Danh mục</a>
+      <button type="button" data-show-favorites>Danh sách đã lưu <span data-saved-count>0</span></button>
+      <button type="button" data-open-support>Đồng hành cùng LUAVANG</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="discover">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> MỘT CHÚT TÒ MÒ, THÊM NHIỀU TRẢI NGHIỆM</p>
+        <h1>Mở ra điều mới.<br><span>Khám phá theo cách của bạn.</span></h1>
+        <p class="hero-description">Từ web app nhỏ xinh đến công cụ hữu ích và trò chơi thú vị — chọn điều bạn thích, khám phá theo nhịp riêng.</p>
+        <a class="button button-primary hero-cta" href="#catalog">Khám phá bộ sưu tập <span aria-hidden="true">↘</span></a>
+        <div class="hero-note"><span class="avatar-stack" aria-hidden="true"><i>L</i><i>V</i><i>+</i></span><span>Một góc nhỏ được tuyển chọn bởi <strong>LUAVANG</strong></span></div>
+      </div>
+      <div class="hero-art" aria-label="Minh họa các trải nghiệm kỹ thuật số" role="img">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-star star-one">✳</div><div class="art-star star-two">✦</div>
+        <div class="art-card card-back"><span class="mini-kicker">YOUR NEXT CLICK</span><div class="mini-lines"><i></i><i></i><i></i></div><span class="mini-circle">↗</span></div>
+        <div class="art-card card-front"><span class="art-label">LUAVANG / DISCOVER</span><div class="art-symbol">✳</div><strong>Ý tưởng<br>thành trải nghiệm.</strong><span class="art-foot">WEB · TOOL · PLAY</span></div>
+        <div class="floating-chip chip-top"><span>✦</span> Tò mò một chút</div>
+        <div class="floating-chip chip-bottom"><span>↗</span> Đi theo sở thích</div>
+      </div>
+    </section>
+
+    <section class="category-section" id="categories">
+      <div class="wrap section-inner">
+        <div class="section-heading compact-heading">
+          <div><p class="eyebrow">TÌM THEO TÂM TRẠNG</p><h2>Hôm nay bạn muốn gì?</h2></div>
+          <p class="section-aside">Chọn một chủ đề để bắt đầu.</p>
+        </div>
+        <div class="category-list" role="group" aria-label="Lọc theo danh mục" data-category-list>
+          <button class="category-pill is-active" type="button" data-category="all" aria-pressed="true"><span>✧</span> Tất cả</button>
+          <button class="category-pill" type="button" data-category="heart" aria-pressed="false"><span>♡</span> Trái tim</button>
+          <button class="category-pill" type="button" data-category="love" aria-pressed="false"><span>♥</span> Tình yêu</button>
+          <button class="category-pill" type="button" data-category="couple" aria-pressed="false"><span>◉</span> Cặp đôi</button>
+          <button class="category-pill" type="button" data-category="cards" aria-pressed="false"><span>▤</span> Thiệp</button>
+          <button class="category-pill" type="button" data-category="birthday" aria-pressed="false"><span>✳</span> Sinh nhật</button>
+          <button class="category-pill" type="button" data-category="tools" aria-pressed="false"><span>⌘</span> App / Tool / Game</button>
+          <button class="category-pill" type="button" data-category="other" aria-pressed="false"><span>＋</span> Khác</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog-section wrap" id="catalog">
+      <div class="section-heading catalog-heading">
+        <div><p class="eyebrow">BỘ SƯU TẬP LUAVANG</p><h2 data-catalog-heading>Điều đáng để khám phá</h2><p class="result-summary" data-result-summary>Đang tải bộ sưu tập…</p></div>
+        <div class="catalog-controls">
+          <label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="search-input" type="search" placeholder="Tìm trải nghiệm…" autocomplete="off" aria-label="Tìm theo tên hoặc mô tả"><kbd>/</kbd></label>
+          <label class="sort-control"><span class="sr-only">Sắp xếp bộ sưu tập</span><select id="sort-select"><option value="featured">Nổi bật</option><option value="name">Tên A–Z</option><option value="newest">Mới cập nhật</option></select></label>
+        </div>
+      </div>
+      <div class="type-filter" role="group" aria-label="Loại nội dung">
+        <button class="type-tab is-active" type="button" data-type="all" aria-pressed="true">Tất cả <span data-type-count="all">0</span></button>
+        <button class="type-tab" type="button" data-type="web" aria-pressed="false">Web app <span data-type-count="web">0</span></button>
+        <button class="type-tab" type="button" data-type="website" aria-pressed="false">Website <span data-type-count="website">0</span></button>
+        <button class="type-tab" type="button" data-type="game" aria-pressed="false">App / Game <span data-type-count="game">0</span></button>
+      </div>
+      <div class="product-grid" data-product-grid aria-live="polite" aria-busy="true"></div>
+      <div class="empty-state" data-empty-state hidden>
+        <div class="empty-icon">⌕</div><h3>Chưa tìm thấy điều phù hợp</h3><p>Thử một từ khóa khác hoặc xóa bộ lọc để xem toàn bộ bộ sưu tập.</p><button class="button button-outline" type="button" data-clear-filters>Xóa bộ lọc</button>
+      </div>
+      <div class="catalog-footnote"><span class="status-dot"></span><span>Nội dung mẫu trong bản bàn giao có thể được thay bằng dữ liệu và liên kết thật trong <code>data/catalog.json</code>.</span></div>
+    </section>
+
+    <section class="closing-section wrap">
+      <div class="closing-card"><div class="closing-decoration" aria-hidden="true">✳</div><div><p class="eyebrow">LUAVANG · KEEP EXPLORING</p><h2>Một cú nhấp nhỏ,<br>một điều mới mẻ.</h2><p>Bạn có ý tưởng cho trải nghiệm tiếp theo? Hãy lưu lại điều mình thích và quay lại bất cứ lúc nào.</p></div><a href="#catalog" class="button button-light">Xem bộ sưu tập <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-main"><a class="brand footer-brand" href="/" aria-label="LUAVANG trang chủ"><span class="brand-mark" aria-hidden="true"><span>L</span><span>V</span></span><span class="brand-word">LUAVANG<span class="brand-dot">.</span><small>KHÔNG GIAN SỐ</small></span></a><p>Một góc nhỏ cho những trải nghiệm số thú vị.</p><a class="footer-top" href="#main">Về đầu trang ↑</a></div>
+    <div class="wrap footer-bottom"><span>© <span data-year></span> LUAVANG. Được xây dựng với sự tò mò.</span><span>Gọn gàng · Dễ khám phá · Ưu tiên trải nghiệm</span></div>
+  </footer>
+
+  <dialog class="detail-dialog" data-detail-dialog aria-labelledby="detail-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Đóng cửa sổ">×</button></form>
+    <div data-detail-content></div>
+  </dialog>
+  <dialog class="support-dialog" data-support-dialog aria-labelledby="support-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Đóng cửa sổ">×</button></form>
+    <div class="support-art" aria-hidden="true">♡</div><p class="eyebrow">CẢM ƠN BẠN ĐÃ GHÉ THĂM</p><h2 id="support-title">Đồng hành cùng LUAVANG</h2><p class="support-copy">Sự quan tâm và góp ý của bạn giúp những trải nghiệm tiếp theo tốt hơn. Bản giao diện mẫu này chưa tích hợp thanh toán hoặc quyên góp trực tuyến.</p><button class="button button-primary" type="button" data-support-copy>Chia sẻ trang LUAVANG <span aria-hidden="true">↗</span></button><p class="copy-feedback" data-copy-feedback aria-live="polite"></p>
+  </dialog>
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+</body>
+</html>

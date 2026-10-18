@@ -1,0 +1,9 @@
+{
+  "name": "luavang-explore",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LUAVANG responsive static catalogue, ready for Vercel",
+  "scripts": {
+    "check": "node scripts/verify.js"
+  }
+}
